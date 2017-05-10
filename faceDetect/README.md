@@ -21,3 +21,16 @@ code for details.
 ## 3. facepp.py
 
 This is the underlying API implementation.
+
+# FaceDetect
+
+Note that opencv for python is required. 
+
+
+## 1. capture_test.py
+This is a sample to read a frame of usb-camera
+
+## 2. detect_test.py
+This 
+
+
