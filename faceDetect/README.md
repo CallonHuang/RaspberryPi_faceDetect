@@ -24,13 +24,47 @@ This is the underlying API implementation.
 
 # FaceDetect
 
-Note that opencv for python is required. 
+Note that opencv for python is required. I use steps as below :
 
+    sudo apt-get install build-essential
+    sudo apt-get update
+    sudo apt-get upgrade
+    sudo rpi-update
+    sudo reboot
+    sudo apt-get install libopencv-dev
+    sudo apt-get install python-opencv
+    sudo apt-get install python-numpy libjpeg-dev libpng12-dev libtiff5-dev libjasper-dev libdc1394-22-dev
+    
+Now your environment is OK.
 
 ## 1. capture_test.py
-This is a sample to read a frame of usb-camera
+This is a sample to read a frame of usb-camera.
 
 ## 2. detect_test.py
-This 
+This is a sample to check faces in pictures.
+
+## 3. search.py
+
+This is a sample to use FacePlusPlus Python SDK like `call.py`, actually it is.
+But because of the network(`CONCURRENCY_LIMIT_EXCEEDED`) and some strange error in `api.search`(`IndexError: list index out of range`), 
+I changed `facepp.py` as below :
+
+    except urllib2.HTTPError as e:
+        print '***network limited!'
+        continue
+        raise APIError(e.code, url, e.read())
+        
+and where we use `api.search`, can modify like :
+    
+    try:
+        search_result = api.search(face_token=ret["faces"][0]["face_token"], outer_id='test')
+    except:
+        print '***picture is not good!'
+        continue
+
+## 4. faceDetect.py
+
+The code to capture usb-camera, detect faces and search the face in faceset.
+In order to ensure real-time, I used a thread to capture usb-camera. 
 
 
