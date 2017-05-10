@@ -67,4 +67,33 @@ and where we use `api.search`, can modify like :
 The code to capture usb-camera, detect faces and search the face in faceset.
 In order to ensure real-time, I used a thread to capture usb-camera. 
 
+# Use Other Apps
 
+I provide a way to use other apps in FacePlusPlus as below:
+1. change the link address, such as detectsceneandobject(`api_server_china = 'https://api-cn.faceplusplus.com/imagepp/beta/'`)
+2. you should modify `facepp.py`:
+```python
+server = 'https://api-cn.faceplusplus.com/imagepp/beta/'
+```    
+```python
+_APIS = [
+    '/detect',
+    '/compare',
+    '/search',
+    '/faceset/create',
+    '/faceset/addface',
+    '/faceset/removeface',
+    '/faceset/update',
+    '/faceset/getdetail',
+    '/faceset/delete',
+    '/faceset/getfacesets',
+    '/face/analyze',
+    '/face/getdetail',
+    '/face/setuserid',
+	'/detectsceneandobject'
+]
+```
+3. use api like:
+```python
+api.detectsceneandobject(image_file=File('./thingset/lab.png'))
+```
